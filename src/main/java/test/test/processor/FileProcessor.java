@@ -6,6 +6,7 @@ import test.test.dto.ListTaskDto;
 import test.test.dto.TaskDto;
 import test.test.model.FileType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface FileProcessor {
@@ -37,4 +38,22 @@ public interface FileProcessor {
         //todo more save
         return "";
     }
+
+    default List<TaskDto> getTaskDtosFromString(String txtContent) {
+        List<TaskDto> tasks = new ArrayList<>();
+        String[] lines = txtContent.split("\\r?\\n");
+
+
+        for (String line : lines) {
+            String[] parts = line.split(" ", 2); // делим на два: номер и описание
+            if (parts.length == 2) {
+                TaskDto task = new TaskDto();
+                task.setNumber(Integer.parseInt(parts[0]));
+                task.setDescription(parts[1]);
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
+
 }
