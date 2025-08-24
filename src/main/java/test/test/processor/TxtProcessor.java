@@ -18,37 +18,9 @@ public class TxtProcessor implements FileProcessor {
     public ListTaskDto processFile(String fileUrl) {
         log.info("Processing txt file");
 
-        RestTemplate restTemplate = new RestTemplate();
-
-        String fileName = getNameFromUrl(fileUrl);
-        List<TaskDto> tasks = new ArrayList<>();
-
-        try {
-            // Получаем файл как строку
-            String txtContent = restTemplate.getForObject(fileUrl, String.class);
-            System.out.println(txtContent);
-
-            String[] lines = txtContent.split("\\r?\\n");
-
-
-            for (String line : lines) {
-                String[] parts = line.split(" ", 2); // делим на два: номер и описание
-                if (parts.length == 2) {
-                    TaskDto task = new TaskDto();
-                    task.setNumber(Integer.parseInt(parts[0]));
-                    task.setDescription(parts[1]);
-                    tasks.add(task);
-                }
-            }
-
-        } catch (Exception e) {
-            System.err.println("Ошибка при скачивании TXT: " + e.getMessage());
-            e.printStackTrace();
-        }
-
         return new ListTaskDto().builder()
-                .fileName(fileName)
-                .tasksList(tasks)
+                .fileName(getNameFromUrl(fileUrl))
+                .tasksList(getTaskDtos(getStrings(fileUrl)))
                 .build();
     }
 
@@ -56,4 +28,24 @@ public class TxtProcessor implements FileProcessor {
     public boolean isSupported(FileType type) {
         return type == FileType.TXT;
     }
+
+    private static List<TaskDto> getTaskDtos(String txtContent) {
+        List<TaskDto> tasks = new ArrayList<>();
+        String[] lines = txtContent.split("\\r?\\n");
+
+
+        for (String line : lines) {
+            String[] parts = line.split(" ", 2); // делим на два: номер и описание
+            if (parts.length == 2) {
+                TaskDto task = new TaskDto();
+                task.setNumber(Integer.parseInt(parts[0]));
+                task.setDescription(parts[1]);
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
+
+
+
 }

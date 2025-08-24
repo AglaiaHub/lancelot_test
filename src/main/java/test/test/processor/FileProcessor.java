@@ -1,5 +1,6 @@
 package test.test.processor;
 
+import org.springframework.web.client.RestTemplate;
 import test.test.dto.FileRequestDto;
 import test.test.dto.ListTaskDto;
 import test.test.dto.TaskDto;
@@ -19,5 +20,21 @@ public interface FileProcessor {
             fileName = fileName.substring(0, queryIndex);
         }
         return fileName;
+    }
+
+    default String getStrings(String fileUrl) {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.getForObject(fileUrl, String.class);
+
+        } catch (Exception e) {
+            System.err.println("Ошибка при скачивании TXT: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        //todo more save
+        return "";
     }
 }
