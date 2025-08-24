@@ -9,7 +9,9 @@ import test.test.model.FileType;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileRequestDto {
-
+    /*
+    The URL path to the file
+     */
     private String file;
     private FileType type;
 }

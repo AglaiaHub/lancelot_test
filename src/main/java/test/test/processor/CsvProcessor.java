@@ -49,14 +49,7 @@ public class CsvProcessor implements FileProcessor {
                 .build();
     }
 
-    private String getNameFromUrl(String fileUrl) {
-        String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-        int queryIndex = fileName.indexOf("?");
-        if (queryIndex != -1) {
-            fileName = fileName.substring(0, queryIndex);
-        }
-        return fileName;
-    }
+
 
     @Override
     public boolean isSupported(FileType type) {

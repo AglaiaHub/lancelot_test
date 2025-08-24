@@ -56,13 +56,4 @@ public class TxtProcessor implements FileProcessor {
     public boolean isSupported(FileType type) {
         return type == FileType.TXT;
     }
-
-    private String getNameFromUrl(String fileUrl) {
-        String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-        int queryIndex = fileName.indexOf("?");
-        if (queryIndex != -1) {
-            fileName = fileName.substring(0, queryIndex);
-        }
-        return fileName;
-    }
 }
