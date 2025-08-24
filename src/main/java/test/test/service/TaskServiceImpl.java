@@ -21,9 +21,10 @@ public class TaskServiceImpl implements TaskService{
     public ListTaskDto transformFile(FileRequestDto fileRequestDto) {
         log.info("Transforming file");
         FileProcessor fileProcessor = fileProcessorFactory.getFileProcessor(fileRequestDto.getType());
-        List<TaskDto> list = fileProcessor.processFile(fileRequestDto.getFile());
+        ListTaskDto listTaskDto = fileProcessor.processFile(fileRequestDto.getFile());
 
-        return null;
+        System.out.println(listTaskDto.toString());
+        return listTaskDto;
     }
 
     @Override
