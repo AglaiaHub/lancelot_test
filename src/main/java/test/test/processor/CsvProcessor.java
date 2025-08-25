@@ -5,9 +5,9 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import test.test.model.FileType;
 import test.test.model.ListTasks;
 import test.test.model.Task;
-import test.test.model.FileType;
 
 import java.io.StringReader;
 import java.util.List;

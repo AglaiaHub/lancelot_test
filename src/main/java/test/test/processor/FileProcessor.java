@@ -44,7 +44,8 @@ public interface FileProcessor {
             String[] parts = line.split(" ", 2); // делим на два: номер и описание
             if (parts.length == 2) {
                 Task task = new Task();
-                task.setNumber(Integer.parseInt(parts[0]));
+                String numberPart = parts[0].replaceAll("\\.$", "");
+                task.setNumber(Integer.parseInt(numberPart));
                 task.setDescription(parts[1].trim());
                 tasks.add(task);
             }
