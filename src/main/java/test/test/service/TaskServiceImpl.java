@@ -28,7 +28,7 @@ public class TaskServiceImpl implements TaskService{
         FileProcessor fileProcessor = fileProcessorFactory.getFileProcessor(fileRequestDto.getType());
         ListTasks listTasks = fileProcessor.processFile(fileRequestDto.getFile());
 
-        System.out.println(listTasks.toString());
+        log.info(listTasks.toString());
 
         if(taskRepository.existsByFileName(listTasks.getFileName())){
             log.info("File already exists");

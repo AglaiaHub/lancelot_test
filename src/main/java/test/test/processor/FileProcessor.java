@@ -30,12 +30,9 @@ public interface FileProcessor {
             return restTemplate.getForObject(fileUrl, String.class);
 
         } catch (Exception e) {
-            System.err.println("Ошибка при скачивании TXT: " + e.getMessage());
             e.printStackTrace();
+            throw new RuntimeException("Failed to download file: " + fileUrl, e);
         }
-
-        //todo more save
-        return "";
     }
 
     default List<Task> getTaskDtosFromString(String txtContent) {
