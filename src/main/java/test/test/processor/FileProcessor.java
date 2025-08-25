@@ -48,7 +48,7 @@ public interface FileProcessor {
             if (parts.length == 2) {
                 Task task = new Task();
                 task.setNumber(Integer.parseInt(parts[0]));
-                task.setDescription(parts[1]);
+                task.setDescription(parts[1].trim());
                 tasks.add(task);
             }
         }

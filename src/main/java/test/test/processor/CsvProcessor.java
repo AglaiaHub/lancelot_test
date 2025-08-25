@@ -33,7 +33,7 @@ public class CsvProcessor implements FileProcessor {
         return type == FileType.CSV;
     }
 
-    private static List<Task> getTaskDtos(String csvContent) {
+    public List<Task> getTaskDtos(String csvContent) {
         CsvToBean<Task> csvToBean = new CsvToBeanBuilder<Task>(new StringReader(csvContent))
                 .withType(Task.class)
                 .withIgnoreLeadingWhiteSpace(true)

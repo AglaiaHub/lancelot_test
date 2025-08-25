@@ -36,7 +36,7 @@ public class ImgProcessor implements FileProcessor {
         return type == FileType.IMG;
     }
 
-    private byte[] downloadImage(String imageUrl) {
+    public byte[] downloadImage(String imageUrl) {
         RestTemplate restTemplate = new RestTemplate();
         byte[] imageBytes = restTemplate.getForObject(imageUrl, byte[].class);
         return imageBytes;
