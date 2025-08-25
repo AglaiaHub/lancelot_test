@@ -1,10 +1,11 @@
 package test.test.service;
 
+import org.springframework.http.ResponseEntity;
 import test.test.dto.FileRequestDto;
-import test.test.dto.ListTaskDto;
+import test.test.dto.ListTasksAnswerDto;
 
 public interface TaskService {
-    ListTaskDto transformFile(FileRequestDto fileRequestDto);
+    ResponseEntity<Void> transformFile(FileRequestDto fileRequestDto);
 
-    ListTaskDto findTaskList(String fileName);
+    ListTasksAnswerDto findTaskList(String fileName);
 }

@@ -1,6 +1,7 @@
 package test.test.dto;
 
 import lombok.*;
+import test.test.model.Task;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListTaskDto {
+public class ListTasksAnswerDto {
     String fileName;
     List<TaskDto> tasksList;
 }

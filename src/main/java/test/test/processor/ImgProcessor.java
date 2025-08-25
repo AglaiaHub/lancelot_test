@@ -7,12 +7,8 @@ import org.springframework.web.client.RestTemplate;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.textract.TextractClient;
 import software.amazon.awssdk.services.textract.model.*;
-import test.test.dto.FileRequestDto;
-import test.test.dto.ListTaskDto;
-import test.test.dto.TaskDto;
+import test.test.model.ListTasks;
 import test.test.model.FileType;
-
-import java.util.List;
 
 @Log4j2
 @Service("imgProcessor")
@@ -23,13 +19,13 @@ public class ImgProcessor implements FileProcessor {
 
 
     @Override
-    public ListTaskDto processFile(String fileUrl) {
+    public ListTasks processFile(String fileUrl) {
         log.info("Processing img file");
 
         String string = extractTextFromImage(downloadImage(fileUrl));
         System.out.println(string);
 
-        return new ListTaskDto().builder()
+        return new ListTasks().builder()
                 .fileName(getNameFromUrl(fileUrl))
                 .tasksList(getTaskDtosFromString(string))
                 .build();

@@ -1,14 +1,13 @@
-package test.test.dto;
+package test.test.model;
 
 import lombok.*;
 
-@Getter
-@Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskDto {
+@Getter
+@Setter
+public class Task {
     int number;
     String description;
 }

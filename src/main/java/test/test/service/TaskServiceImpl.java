@@ -2,33 +2,49 @@ package test.test.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import test.test.dao.TaskRepository;
 import test.test.dto.FileRequestDto;
-import test.test.dto.ListTaskDto;
-import test.test.dto.TaskDto;
+import test.test.dto.ListTasksAnswerDto;
+import test.test.model.ListTasks;
 import test.test.processor.FileProcessor;
 import test.test.processor.FileProcessorFactory;
-
-import java.awt.*;
-import java.util.List;
 
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService{
     final FileProcessorFactory fileProcessorFactory;
+    final TaskRepository taskRepository;
+    final ModelMapper modelMapper;
+
+
     @Override
-    public ListTaskDto transformFile(FileRequestDto fileRequestDto) {
+    public ResponseEntity<Void> transformFile(FileRequestDto fileRequestDto) {
         log.info("Transforming file");
         FileProcessor fileProcessor = fileProcessorFactory.getFileProcessor(fileRequestDto.getType());
-        ListTaskDto listTaskDto = fileProcessor.processFile(fileRequestDto.getFile());
+        ListTasks listTasks = fileProcessor.processFile(fileRequestDto.getFile());
 
-        System.out.println(listTaskDto.toString());
-        return listTaskDto;
+        System.out.println(listTasks.toString());
+
+        if(taskRepository.existsByFileName(listTasks.getFileName())){
+            log.info("File already exists");
+            return ResponseEntity.badRequest().build();
+        }
+
+        taskRepository.save(listTasks);
+        log.info("File saved" + listTasks.getFileName() + " " + listTasks.getId());
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Override
-    public ListTaskDto findTaskList(String fileName) {
-        return null;
+    public ListTasksAnswerDto findTaskList(String fileName) {
+        log.info("Finding tasks list");
+        ListTasks listTasks = taskRepository.findByFileName(fileName).orElseThrow(RuntimeException::new);
+        return modelMapper.map(listTasks, ListTasksAnswerDto.class);
     }
 }

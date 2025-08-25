@@ -1,16 +1,15 @@
 package test.test.processor;
 
 import org.springframework.web.client.RestTemplate;
-import test.test.dto.FileRequestDto;
-import test.test.dto.ListTaskDto;
-import test.test.dto.TaskDto;
+import test.test.model.ListTasks;
+import test.test.model.Task;
 import test.test.model.FileType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface FileProcessor {
-    ListTaskDto processFile(String fileUrl);
+    ListTasks processFile(String fileUrl);
 
     boolean isSupported(FileType type);
 
@@ -39,15 +38,15 @@ public interface FileProcessor {
         return "";
     }
 
-    default List<TaskDto> getTaskDtosFromString(String txtContent) {
-        List<TaskDto> tasks = new ArrayList<>();
+    default List<Task> getTaskDtosFromString(String txtContent) {
+        List<Task> tasks = new ArrayList<>();
         String[] lines = txtContent.split("\\r?\\n");
 
 
         for (String line : lines) {
             String[] parts = line.split(" ", 2); // делим на два: номер и описание
             if (parts.length == 2) {
-                TaskDto task = new TaskDto();
+                Task task = new Task();
                 task.setNumber(Integer.parseInt(parts[0]));
                 task.setDescription(parts[1]);
                 tasks.add(task);

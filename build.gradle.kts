@@ -34,6 +34,12 @@ dependencies {
     // https://mvnrepository.com/artifact/software.amazon.awssdk/textract
     implementation("software.amazon.awssdk:textract:2.32.29")
 
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.5.5")
+
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    implementation("org.modelmapper:modelmapper:3.2.4")
+
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
