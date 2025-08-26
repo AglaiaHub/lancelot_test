@@ -13,14 +13,15 @@ import test.test.dto.FileRequestDto;
 import test.test.dto.ListTasksAnswerDto;
 import test.test.model.ListTasks;
 import test.test.processor.FileProcessor;
-import test.test.processor.FileProcessorFactory;
+
+import java.util.Map;
 
 
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService{
-    final FileProcessorFactory fileProcessorFactory;
+    private final Map<String, FileProcessor> processors;
     final TaskRepository taskRepository;
     final ModelMapper modelMapper;
 
@@ -28,8 +29,7 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public ResponseEntity<Void> transformFile(FileRequestDto fileRequestDto) {
         log.info("Transforming file");
-        FileProcessor fileProcessor = fileProcessorFactory
-                .getFileProcessor(fileRequestDto.getType());
+        FileProcessor fileProcessor = processors.get(fileRequestDto.getType().name());
         ListTasks listTasks = fileProcessor.processFile(fileRequestDto.getFile());
 
         log.info(listTasks.toString());

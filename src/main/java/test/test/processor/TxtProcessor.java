@@ -5,16 +5,14 @@ import org.springframework.stereotype.Service;
 import test.test.model.FileType;
 import test.test.model.ListTasks;
 
-import static test.test.processor.FileProcessor.TXT;
-
 @Log4j2
-@Service(TXT)
+@Service("TXT")
 public class TxtProcessor implements FileProcessor {
     @Override
     public ListTasks processFile(String fileUrl) {
         log.info("Processing txt file");
 
-        return ListTasks.builder()
+        return new ListTasks().builder()
                 .fileName(getNameFromUrl(fileUrl))
                 .tasksList(getTaskDtosFromString(getStrings(fileUrl)))
                 .build();
@@ -22,6 +20,8 @@ public class TxtProcessor implements FileProcessor {
 
     @Override
     public boolean isSupported(FileType type) {
-        return type.getType().equals(TXT);
+        return type == FileType.TXT;
     }
+
+
 }

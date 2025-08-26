@@ -14,11 +14,8 @@ import test.test.model.FileType;
 import test.test.model.ListTasks;
 import test.test.model.Task;
 import test.test.processor.FileProcessor;
-import test.test.processor.FileProcessorFactory;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
