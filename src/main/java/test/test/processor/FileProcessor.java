@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface FileProcessor {
+
+    String IMG = "img";
+    String CSV = "csv";
+    String TXT = "txt";
+
     ListTasks processFile(String fileUrl);
 
     boolean isSupported(FileType type);

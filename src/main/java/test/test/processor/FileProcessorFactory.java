@@ -20,6 +20,4 @@ public class FileProcessorFactory {
         return processors.get(type.name().toLowerCase() + "Processor");
 
     }
-
-
 }

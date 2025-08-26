@@ -12,8 +12,10 @@ import test.test.model.Task;
 import java.io.StringReader;
 import java.util.List;
 
+import static test.test.processor.FileProcessor.CSV;
+
 @Log4j2
-@Service("csvProcessor")
+@Service(CSV)
 @RequiredArgsConstructor
 public class CsvProcessor implements FileProcessor {
 
@@ -30,7 +32,7 @@ public class CsvProcessor implements FileProcessor {
 
     @Override
     public boolean isSupported(FileType type) {
-        return type == FileType.CSV;
+        return type.getType().equals(CSV);
     }
 
     public List<Task> getTaskDtos(String csvContent) {

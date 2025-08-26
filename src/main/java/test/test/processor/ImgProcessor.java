@@ -25,7 +25,7 @@ public class ImgProcessor implements FileProcessor {
         String string = extractTextFromImage(downloadImage(fileUrl));
         System.out.println(string);
 
-        return new ListTasks().builder()
+        return ListTasks.builder()
                 .fileName(getNameFromUrl(fileUrl))
                 .tasksList(getTaskDtosFromString(string))
                 .build();
@@ -38,8 +38,7 @@ public class ImgProcessor implements FileProcessor {
 
     public byte[] downloadImage(String imageUrl) {
         RestTemplate restTemplate = new RestTemplate();
-        byte[] imageBytes = restTemplate.getForObject(imageUrl, byte[].class);
-        return imageBytes;
+        return restTemplate.getForObject(imageUrl, byte[].class);
     }
 
     public String extractTextFromImage(byte[] imageBytes) {
@@ -58,6 +57,4 @@ public class ImgProcessor implements FileProcessor {
 
         return fullText.toString();
     }
-
-
 }
