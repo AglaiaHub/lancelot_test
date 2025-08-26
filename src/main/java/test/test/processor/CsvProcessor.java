@@ -12,8 +12,10 @@ import test.test.model.Task;
 import java.io.StringReader;
 import java.util.List;
 
+import static test.test.processor.FileProcessor.CSV;
+
 @Log4j2
-@Service("CSV")
+@Service(CSV)
 @RequiredArgsConstructor
 public class CsvProcessor implements FileProcessor {
 

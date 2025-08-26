@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import test.test.model.FileType;
 import test.test.model.ListTasks;
 
+import static test.test.processor.FileProcessor.TXT;
+
 @Log4j2
-@Service("TXT")
+@Service(TXT)
 public class TxtProcessor implements FileProcessor {
     @Override
     public ListTasks processFile(String fileUrl) {
