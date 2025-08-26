@@ -1,9 +1,9 @@
 package test.test.processor;
 
 import org.springframework.web.client.RestTemplate;
+import test.test.model.FileType;
 import test.test.model.ListTasks;
 import test.test.model.Task;
-import test.test.model.FileType;
 
 import java.util.ArrayList;
 import java.util.List;

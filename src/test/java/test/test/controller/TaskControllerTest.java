@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.server.ResponseStatusException;
 import test.test.dto.FileRequestDto;
 import test.test.dto.ListTasksAnswerDto;
 import test.test.dto.TaskDto;
@@ -213,13 +214,16 @@ class TaskControllerTest {
     @DisplayName("GET /tasks/{fileName} - файл не найден")
     void findTasksList_FileNotFound() throws Exception {
         String fileName = "non-existing-file.csv";
+
         when(taskService.findTaskList(eq(fileName)))
-                .thenThrow(new RuntimeException("File not found"));
+                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "File not found"));
 
         mockMvc.perform(get("/tasks/{fileName}", fileName)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isNotFound()); // ✅ вместо isInternalServerError()
     }
+
+
 
     @Test
     @DisplayName("GET /tasks/{fileName} - пустой список задач")

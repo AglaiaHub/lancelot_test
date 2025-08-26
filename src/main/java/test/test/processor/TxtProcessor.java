@@ -2,8 +2,8 @@ package test.test.processor;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import test.test.model.ListTasks;
 import test.test.model.FileType;
+import test.test.model.ListTasks;
 
 @Log4j2
 @Service("txtProcessor")
@@ -22,9 +22,6 @@ public class TxtProcessor implements FileProcessor {
     public boolean isSupported(FileType type) {
         return type == FileType.TXT;
     }
-
-
-
 
 
 }

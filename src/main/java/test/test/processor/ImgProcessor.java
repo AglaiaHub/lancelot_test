@@ -7,8 +7,8 @@ import org.springframework.web.client.RestTemplate;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.textract.TextractClient;
 import software.amazon.awssdk.services.textract.model.*;
-import test.test.model.ListTasks;
 import test.test.model.FileType;
+import test.test.model.ListTasks;
 
 @Log4j2
 @Service("imgProcessor")

@@ -4,14 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import test.test.dao.TaskRepository;
 import test.test.dto.FileRequestDto;
 import test.test.dto.ListTasksAnswerDto;
 import test.test.model.ListTasks;
 import test.test.processor.FileProcessor;
 import test.test.processor.FileProcessorFactory;
+
 
 @Log4j2
 @Service
@@ -44,7 +47,9 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public ListTasksAnswerDto findTaskList(String fileName) {
         log.info("Finding tasks list");
-        ListTasks listTasks = taskRepository.findByFileName(fileName).orElseThrow(RuntimeException::new);
+        ListTasks listTasks = taskRepository
+                .findByFileName(fileName)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404)));
         return modelMapper.map(listTasks, ListTasksAnswerDto.class);
     }
 }
