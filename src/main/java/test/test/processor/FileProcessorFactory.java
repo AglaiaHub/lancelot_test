@@ -14,12 +14,12 @@ public class FileProcessorFactory {
 
     public FileProcessor getFileProcessor(FileType type) {
 
-        return switch (type) {
-            case CSV -> processors.get("csvProcessor");
-            case TXT -> processors.get("txtProcessor");
-            case IMG -> processors.get("imgProcessor");
-            default -> throw new IllegalArgumentException("Unsupported type: " + type);
-        };
+        for (var entry : processors.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue().isSupported(type) + " " + type);
+        }
+
+        return processors.get(type.name().toLowerCase() + "Processor");
+
     }
 
 

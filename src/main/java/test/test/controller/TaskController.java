@@ -2,6 +2,9 @@ package test.test.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +13,6 @@ import test.test.dto.FileRequestDto;
 import test.test.dto.ListTasksAnswerDto;
 import test.test.service.TaskService;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 
 @RestController
@@ -42,7 +40,7 @@ public class TaskController {
             }
     )
     @PostMapping("/transform")
-    public ResponseEntity<Void> transformFile(@RequestBody FileRequestDto fileRequestDto) {
+    public ResponseEntity<Void> transformFile(@org.springframework.web.bind.annotation.RequestBody FileRequestDto fileRequestDto) {
         log.info("Transforming file: type: " + fileRequestDto.getType() + ", uri: " + fileRequestDto.getFile());
         return taskService.transformFile(fileRequestDto);
     }
