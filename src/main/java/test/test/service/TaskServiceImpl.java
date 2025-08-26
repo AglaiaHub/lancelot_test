@@ -28,7 +28,8 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public ResponseEntity<Void> transformFile(FileRequestDto fileRequestDto) {
         log.info("Transforming file");
-        FileProcessor fileProcessor = fileProcessorFactory.getFileProcessor(fileRequestDto.getType());
+        FileProcessor fileProcessor = fileProcessorFactory
+                .getFileProcessor(fileRequestDto.getType());
         ListTasks listTasks = fileProcessor.processFile(fileRequestDto.getFile());
 
         log.info(listTasks.toString());
