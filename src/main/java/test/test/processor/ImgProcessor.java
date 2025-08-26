@@ -10,8 +10,10 @@ import software.amazon.awssdk.services.textract.model.*;
 import test.test.model.FileType;
 import test.test.model.ListTasks;
 
+import static test.test.processor.FileProcessor.IMG;
+
 @Log4j2
-@Service("imgProcessor")
+@Service(IMG)
 @AllArgsConstructor
 public class ImgProcessor implements FileProcessor {
 
@@ -33,7 +35,7 @@ public class ImgProcessor implements FileProcessor {
 
     @Override
     public boolean isSupported(FileType type) {
-        return type == FileType.IMG;
+        return type.getType().equals(IMG);
     }
 
     public byte[] downloadImage(String imageUrl) {
