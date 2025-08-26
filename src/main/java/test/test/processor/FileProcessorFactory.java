@@ -10,7 +10,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class FileProcessorFactory {
     private final Map<String, FileProcessor> processors;
-//TODO - change to type, but no Autowired
 
     public FileProcessor getFileProcessor(FileType type) {
 
