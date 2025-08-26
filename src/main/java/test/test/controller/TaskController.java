@@ -36,7 +36,7 @@ public class TaskController {
                     )
             ),
             responses = {
-                    @ApiResponse(responseCode = "200", description = "File transformed successfully"),
+                    @ApiResponse(responseCode = "201", description = "File transformed successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid request"),
                     @ApiResponse(responseCode = "500", description = "Internal server error")
             }
